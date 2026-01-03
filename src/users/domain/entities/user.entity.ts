@@ -17,8 +17,28 @@ export class UserEntity extends Entity<UserProps> {
     this.props.createdAt = this.props.createdAt ?? new Date()
   }
 
+  update(
+    data: Partial<Pick<UserProps, 'name' | 'phoneNumber' | 'password'>>,
+  ): void {
+    if (data.name !== undefined) {
+      this.props.name = data.name
+    }
+
+    if (data.phoneNumber !== undefined) {
+      this.props.phoneNumber = data.phoneNumber
+    }
+
+    if (data.password !== undefined) {
+      this.props.password = data.password
+    }
+  }
+
   get name() {
     return this.props.name
+  }
+
+  private set name(value: string) {
+    this.props.name = value
   }
 
   get email() {
@@ -29,8 +49,16 @@ export class UserEntity extends Entity<UserProps> {
     return this.props.phoneNumber
   }
 
+  private set phoneNumber(value: string) {
+    this.props.password = value
+  }
+
   get password() {
     return this.props.password
+  }
+
+  private set password(value: string) {
+    this.props.password = value
   }
 
   get createdAt() {

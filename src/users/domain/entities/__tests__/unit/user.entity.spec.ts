@@ -6,44 +6,75 @@ describe('UserEntity unit tests', () => {
   let sut: UserEntity
 
   beforeEach(() => {
+    // Gera dados falsos para o usuário
     props = UserDataBuilder({})
     sut = new UserEntity(props)
   })
 
-  it('Constructor method', () => {
-    expect(sut.props.name).toEqual(props.name)
-    expect(sut.props.email).toEqual(props.email)
-    expect(sut.props.phoneNumber).toEqual(props.phoneNumber)
-    expect(sut.props.password).toEqual(props.password)
-    expect(sut.props.createdAt).toBeInstanceOf(Date)
+  // ================= CONSTRUCTOR =================
+  it('should initialize with correct props', () => {
+    expect(sut.name).toEqual(props.name)
+    expect(sut.email).toEqual(props.email)
+    expect(sut.phoneNumber).toEqual(props.phoneNumber)
+    expect(sut.password).toEqual(props.password)
+    expect(sut.createdAt).toBeInstanceOf(Date)
   })
 
-  it('Getter of name field', () => {
-    expect(sut.props.name).toBeDefined()
-    expect(sut.props.name).toEqual(props.name)
-    expect(typeof sut.props.name).toBe('string')
+  // ================= GETTERS =================
+  it('should return the name', () => {
+    expect(sut.name).toBeDefined()
+    expect(sut.name).toEqual(props.name)
+    expect(typeof sut.name).toBe('string')
   })
 
-  it('Getter of email field', () => {
-    expect(sut.props.email).toBeDefined()
-    expect(sut.props.email).toEqual(props.email)
-    expect(typeof sut.props.email).toBe('string')
+  it('should return the email', () => {
+    expect(sut.email).toBeDefined()
+    expect(sut.email).toEqual(props.email)
+    expect(typeof sut.email).toBe('string')
   })
 
-  it('Getter of phoneNumber field', () => {
-    expect(sut.props.phoneNumber).toBeDefined()
-    expect(sut.props.phoneNumber).toEqual(props.phoneNumber)
+  it('should return the phoneNumber', () => {
+    expect(sut.phoneNumber).toBeDefined()
+    expect(sut.phoneNumber).toEqual(props.phoneNumber)
     expect(typeof sut.phoneNumber).toBe('string')
   })
 
-  it('Getter of password field', () => {
-    expect(sut.props.password).toBeDefined()
-    expect(sut.props.password).toEqual(props.password)
-    expect(typeof sut.props.password).toBe('string')
+  it('should return the password', () => {
+    expect(sut.password).toBeDefined()
+    expect(sut.password).toEqual(props.password)
+    expect(typeof sut.password).toBe('string')
   })
 
-  it('Getter of password field', () => {
-    expect(sut.props.createdAt).toBeDefined()
-    expect(sut.props.createdAt).toBeInstanceOf(Date)
+  it('should return the createdAt', () => {
+    expect(sut.createdAt).toBeDefined()
+    expect(sut.createdAt).toBeInstanceOf(Date)
+  })
+
+  // ================= UPDATE =================
+  it('should update the name', () => {
+    sut.update({ name: 'Marcio Updated' })
+    expect(sut.name).toEqual('Marcio Updated')
+  })
+
+  it('should update the password', () => {
+    sut.update({ password: 'novaSenha' })
+    expect(sut.password).toEqual('novaSenha')
+  })
+
+  it('should update the phone number', () => {
+    sut.update({ phoneNumber: '987654321' })
+    expect(sut.phoneNumber).toEqual('987654321')
+  })
+
+  it('should update multiple fields at once', () => {
+    sut.update({
+      name: 'Novo Nome',
+      phoneNumber: '999999999',
+      password: 'novaSenha',
+    })
+
+    expect(sut.name).toEqual('Novo Nome')
+    expect(sut.phoneNumber).toEqual('999999999')
+    expect(sut.password).toEqual('novaSenha')
   })
 })
